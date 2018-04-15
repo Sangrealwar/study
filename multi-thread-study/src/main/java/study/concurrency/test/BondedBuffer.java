@@ -9,6 +9,7 @@ import java.util.concurrent.Semaphore;
  * Created by wq on 2018/4/15.
  */
 public class BondedBuffer<E> {
+
     //表示客户端获得的许可（初始为0）
     private final Semaphore availableItems;
     //表示数组原有的许可（为数组长度）
