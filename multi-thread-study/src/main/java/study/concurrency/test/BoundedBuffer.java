@@ -8,7 +8,7 @@ import java.util.concurrent.Semaphore;
  * 条件：
  * Created by wq on 2018/4/15.
  */
-public class BondedBuffer<E> {
+public class BoundedBuffer<E> {
 
     //表示客户端获得的许可（初始为0）
     private final Semaphore availableItems;
@@ -18,7 +18,7 @@ public class BondedBuffer<E> {
     private final E[] items;
     private int putPosition = 0, takePosition = 0;
 
-    public BondedBuffer(int capacity) {
+    public BoundedBuffer(int capacity) {
         availableItems = new Semaphore(0);
         availableSpaces = new Semaphore(capacity);
         items = (E[]) new Object[capacity];

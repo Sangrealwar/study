@@ -12,14 +12,14 @@ import org.junit.Test;
 public class BoundedBufferTest extends TestCase {
 
     @Test
-    void testIsEmptyWhenConstracted() {
+    public void testIsEmptyWhenConstracted() {
         BoundedBuffer<Integer> bb = new BoundedBuffer(10);
         assertTrue(bb.isEmpty());
         assertFalse(bb.isFull());
     }
 
     @Test
-    void testIsFullAfterPuts() throws InterruptedException {
+    public void testIsFullAfterPuts() throws InterruptedException {
         BoundedBuffer<Integer> bb = new BoundedBuffer(10);
         for (int i = 0; i < 10; i++) {
             bb.put(i);
