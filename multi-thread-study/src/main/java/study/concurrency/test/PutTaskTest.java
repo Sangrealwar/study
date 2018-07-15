@@ -48,7 +48,7 @@ public class PutTaskTest {
             if(putSum.get() == takeSum.get()){
                 System.out.println("相等");
             }
-            System.out.println("跑了");
+            System.out.println("程序执行了");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (BrokenBarrierException e) {
