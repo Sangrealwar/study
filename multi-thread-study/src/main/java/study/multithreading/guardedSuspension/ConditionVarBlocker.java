@@ -30,7 +30,7 @@ public class ConditionVarBlocker implements Blocker {
 
     public <V> V callWithGuard(GuardedAction<V> guardedAction) throws Exception {
         //针对受保护对象的变量而言，保护方法的判断条件是读线程，而受保护对象的stateChange方法是写线程
-        //为了保证变量的正确性，这里加锁了
+        //为了保证变量的正确性，这里加锁了，但可以响应中断
         lock.lockInterruptibly();
 
         V result;

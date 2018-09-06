@@ -71,7 +71,7 @@ public class AlarmAgent {
         heartbeatTimer.schedule(new HeartbeatTask(), 60000, 2000);
     }
 
-    public void disconned() {
+    public void disconnect() {
         System.out.println("中断告警服务器连接");
         connectedToServer = false;
     }

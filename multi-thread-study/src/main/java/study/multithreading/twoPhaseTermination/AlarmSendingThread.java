@@ -62,7 +62,7 @@ public class AlarmSendingThread extends AbstractTerminatableThread {
         if (null != exp && !(exp instanceof InterruptedException)) {
             exp.printStackTrace();
         }
-        alarmAgent.disconned();
+        alarmAgent.disconnect();
     }
 
     public int sendAlarm(final AlarmInfo alarmInfo) {
