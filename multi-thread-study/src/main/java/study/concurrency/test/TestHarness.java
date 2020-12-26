@@ -52,7 +52,7 @@ public class TestHarness {
 
         long start = System.nanoTime();
         Thread.sleep(1000);             //主线程等待一下，可以直观的看出，所有线程在await阻塞了
-        System.out.println("主线程：开始的闭锁打开");
+        System.out.println("主线程：每个子任务的闭锁先关闭，等待每一个子任务自行开启闭锁");
         startGate.countDown();
         System.out.println("主线程：准备等待结束的闭锁打开");
         endGate.await();

@@ -45,14 +45,22 @@ public class MultiPatch {
         Father father = new Father();
         Father son = new Son();
 
+        Soft aa = new QQ();
+        Soft bb = new _360();
+
         QQ qq = new QQ();
         _360 _360 = new _360();
         father.hardChoise(_360);
         son.hardChoise(qq);
 
+        father.hardChoise(aa);
+        son.hardChoise(bb);
+
         //首先是静态分派，Father有两个重载的方法，因为是编译期确定，根据传入的参数的静态类型，确定执行的那个版本
         //所以，调用的应该是hardChoise(_360 arg)和（hardChoise(QQ arg)）
-        //然后是动态分派，根据invokevirtual传入的接收者的实际类型（Father，Son）
-        //因为静态分派时，
+        //然后是动态分派，根据invokevirtual传入的接收者的实际类型（Father，Son），所以实际执行的是Father，son的hardChoise
+        //简单理解
+        //重载方法的选择是静态的，只取决于传入参数类型和引用类型（静态类型）
+        //重写方法的选择是动态的，取决于调用者的实际类型
     }
 }
