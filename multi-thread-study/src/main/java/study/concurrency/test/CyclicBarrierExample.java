@@ -11,25 +11,29 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 名称：
  * 功能：利用CyclicBarrier等待所有的生产者线程和消费者线程同时开始，然后根据伪随机技术，判断两个消费者是否按顺序执行
+ * 在并行迭代算法中十分有用，通常这种算法将一个问题拆分为一系列的独立问题
+ *
+ *
+ * 和闭锁一样，
  * 条件：
  * Created by wq on 2018/4/15.
  */
-public class PutTaskTest {
+public class CyclicBarrierExample {
     private static final ExecutorService pool = Executors.newCachedThreadPool();
 
     private final AtomicInteger putSum = new AtomicInteger(0);
     private final AtomicInteger takeSum = new AtomicInteger(0);
     private final CyclicBarrier barrier;
-    private final BoundedBuffer<Integer> bb;
+    private final SemaphoreExample<Integer> bb;
     private final int nTrials, nPairs;
 
     public static void main(String[] args) {
-        new PutTaskTest(10, 30, 10000).test();
+        new CyclicBarrierExample(10, 10, 100).test();
         pool.shutdown();
     }
 
-    PutTaskTest(int capacity, int npairs, int ntrials) {
-        this.bb = new BoundedBuffer<>(capacity);
+    CyclicBarrierExample(int capacity, int npairs, int ntrials) {
+        this.bb = new SemaphoreExample<>(capacity);
         this.nTrials = ntrials;
         this.nPairs = npairs;
         this.barrier = new CyclicBarrier(capacity * 2 + 1);
@@ -63,6 +67,7 @@ public class PutTaskTest {
             try {
                 int seed = (this.hashCode() ^ (int) System.nanoTime());
                 int sum = 0;
+                System.out.println("生产者"+Thread.currentThread().getName()+"等待开始计算");
                 barrier.await();
                 //每个线程内部将缓存的数字合并起来
                 for (int i = nTrials; i > 0; --i) {
@@ -71,6 +76,7 @@ public class PutTaskTest {
                     seed = xorShift(seed);
                 }
                 putSum.getAndAdd(sum);
+                System.out.println("生产者"+Thread.currentThread().getName()+"等待结束计算");
                 barrier.await();
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -83,11 +89,13 @@ public class PutTaskTest {
         public void run() {
             try {
                 int sum = 0;
+                System.out.println("消费者"+Thread.currentThread().getName()+"等待开始计算");
                 barrier.await();
                 for (int i = nTrials; i > 0; --i) {
                     sum += bb.take();
                 }
                 takeSum.getAndAdd(sum);
+                System.out.println("消费者"+Thread.currentThread().getName()+"等待结束计算");
                 barrier.await();
             } catch (Exception e) {
                 throw new RuntimeException(e);

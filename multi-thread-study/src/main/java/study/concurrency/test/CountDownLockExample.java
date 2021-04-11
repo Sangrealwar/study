@@ -9,10 +9,10 @@ import java.util.concurrent.CountDownLatch;
  * 条件：
  * Created by wq on 2018/7/15.
  */
-public class TestHarness {
+public class CountDownLockExample {
 
     public static void main(String[] args) throws InterruptedException {
-        TestHarness harness = new TestHarness();
+        CountDownLockExample harness = new CountDownLockExample();
 
         harness.timeTask(4, new Runnable() {
             @Override

@@ -1,6 +1,8 @@
 package study;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,6 +13,19 @@ import java.util.Set;
  */
 public class Main {
     public static void main(String[] args) {
+test2();
+    }
+
+    private static void test2(){
+        List<Integer> aa = new LinkedList<>();
+
+        aa.add(1);
+        aa.add(2);
+
+        System.out.println(aa);
+    }
+
+    private static void test1() {
         int index  =1;
         String[] test = new String[3];
         String foo = test[index];
@@ -39,6 +54,7 @@ public class Main {
         System.out.println(str1 == str2);
         System.out.println(str2 == str3);
         System.out.println(str1 == str4);
-
     }
+
+
 }

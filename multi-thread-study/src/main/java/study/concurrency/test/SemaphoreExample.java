@@ -4,11 +4,12 @@ import java.util.concurrent.Semaphore;
 
 /**
  * 名称：
- * 功能：用信号量控制put和take，实际中，可能会用到ArrayBlockingQueue等有界缓存，原理相同
+ * 功能：用信号量控制put和take，将数组构造成有界容器，put和take是线程安全的
+ *       实际中，可能会用到ArrayBlockingQueue等有界缓存，原理相同
  * 条件：
  * Created by wq on 2018/4/15.
  */
-public class BoundedBuffer<E> {
+public class SemaphoreExample<E> {
 
     //表示客户端获得的许可（初始为0）
     private final Semaphore availableItems;
@@ -18,7 +19,7 @@ public class BoundedBuffer<E> {
     private final E[] items;
     private int putPosition = 0, takePosition = 0;
 
-    public BoundedBuffer(int capacity) {
+    public SemaphoreExample(int capacity) {
         availableItems = new Semaphore(0);
         availableSpaces = new Semaphore(capacity);
         items = (E[]) new Object[capacity];

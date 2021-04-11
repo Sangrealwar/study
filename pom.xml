@@ -12,6 +12,7 @@
         <module>vm-study</module>
         <module>multi-thread-study</module>
         <module>jwtstudy</module>
+        <module>rockmq</module>
     </modules>
     <dependencies>
         <dependency>
